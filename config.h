@@ -1,3 +1,4 @@
+#include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
@@ -9,7 +10,7 @@ static const unsigned int gappoh    = 10;       /* horiz outer gap between windo
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 static const char *fonts[]          = { "SauceCodePro Nerd Font Mono:size=14" };
 static const char dmenufont[]       = "SauceCodePro Nerd Font Mono:size=14";
@@ -55,7 +56,7 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "Tile",      tile },    /* first entry is default */
 	{ "Flot",      NULL },    /* no layout function means floating behavior */
-	{ "Monocle",      monocle },
+	{ "Monocle",   monocle },
 };
 
 /* key definitions */
@@ -80,15 +81,21 @@ static const char *trayercmd[] = {"/home/chuanzhangjiang/.dwm/tr-toggle.sh", NUL
 static const char *volupscript[] = {"/home/chuanzhangjiang/.dwm/vol-up.sh", NULL};
 static const char *voldownscript[] = {"/home/chuanzhangjiang/.dwm/vol-down.sh", NULL};
 static const char *voltogglescript[] = {"/home/chuanzhangjiang/.dwm/vol-toggle.sh", NULL};
+static const char *backlight_up[] = {"/home/chuanzhangjiang/.dwm/backlight-up.sh", NULL};
+static const char *backlight_down[] = {"/home/chuanzhangjiang/.dwm/backlight-down.sh", NULL};
+static const char *network_manager[] = {"/home/chuanzhangjiang/.dwm/network-manager.sh", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = trayercmd } },
-	{ 0,                            XK_F8,     spawn,          {.v = volupscript } },
-	{ 0,                            XK_F7,     spawn,          {.v = voldownscript } },
-	{ 0,                            XK_F6,     spawn,          {.v = voltogglescript } },
+	{ 0,          XF86XK_AudioRaiseVolume,     spawn,          {.v = volupscript } },
+	{ 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = voldownscript } },
+	{ 0,                 XF86XK_AudioMute,     spawn,          {.v = voltogglescript } },
+	{ 0,           XF86XK_MonBrightnessUp,     spawn,          {.v = backlight_up } },
+	{ 0,           XF86XK_MonBrightnessDown,   spawn,          {.v = backlight_down } },
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = network_manager } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
