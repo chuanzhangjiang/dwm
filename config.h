@@ -77,7 +77,6 @@ static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
-static const char *trayercmd[] = {"/home/chuanzhangjiang/.dwm/tr-toggle.sh", NULL};
 static const char *volupscript[] = {"/home/chuanzhangjiang/.dwm/vol-up.sh", NULL};
 static const char *voldownscript[] = {"/home/chuanzhangjiang/.dwm/vol-down.sh", NULL};
 static const char *voltogglescript[] = {"/home/chuanzhangjiang/.dwm/vol-toggle.sh", NULL};
@@ -89,7 +88,6 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = trayercmd } },
 	{ 0,          XF86XK_AudioRaiseVolume,     spawn,          {.v = volupscript } },
 	{ 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = voldownscript } },
 	{ 0,                 XF86XK_AudioMute,     spawn,          {.v = voltogglescript } },
