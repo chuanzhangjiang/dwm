@@ -12,8 +12,8 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
-static const char *fonts[]          = { "SauceCodePro Nerd Font Mono:size=14" };
-static const char dmenufont[]       = "SauceCodePro Nerd Font Mono:size=14";
+static const char *fonts[]          = { "FiraMono Nerd Font Mono:size=16" };
+static const char dmenufont[]       = "FiraMono Nerd Font Mono:size=16";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -42,9 +42,11 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class                  instance    title       tags mask     isfloating   monitor */
+	{ "Gimp",                 NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",              NULL,       NULL,       1 << 8,       0,           -1 },
+        { "Google-Chrome", "google-chrome",   NULL,       1 << 8,       0,           -1 },
+	{ "Vlc",                  "vlc",      NULL,       1 << 5,     False,         -1 }
 };
 
 /* layout(s) */
@@ -83,6 +85,7 @@ static const char *voltogglescript[] = {"/home/chuanzhangjiang/.dwm/vol-toggle.s
 static const char *backlight_up[] = {"/home/chuanzhangjiang/.dwm/backlight-up.sh", NULL};
 static const char *backlight_down[] = {"/home/chuanzhangjiang/.dwm/backlight-down.sh", NULL};
 static const char *network_manager[] = {"/home/chuanzhangjiang/.dwm/network-manager.sh", NULL};
+static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -92,7 +95,8 @@ static Key keys[] = {
 	{ 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = voldownscript } },
 	{ 0,                 XF86XK_AudioMute,     spawn,          {.v = voltogglescript } },
 	{ 0,           XF86XK_MonBrightnessUp,     spawn,          {.v = backlight_up } },
-	{ 0,           XF86XK_MonBrightnessDown,   spawn,          {.v = backlight_down } },
+	{ 0,           XF86XK_MonBrightnessDown,   spawn,          {.v = backlight_down } },	
+	{ 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = network_manager } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
